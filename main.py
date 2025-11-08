@@ -1,5 +1,5 @@
-from PySide6.QtWidgets import QApplication, QMainWindow
-from PySide6.QtUiTools import loadUiType
+from PyQt6.QtWidgets import QApplication, QMainWindow
+from PyQt6 import uic
 import os
 import sys
 
@@ -9,16 +9,13 @@ ui_file = os.path.join(current_dir, "src-ui", "mainwindow.ui")
 if not os.path.exists(ui_file):
     raise FileNotFoundError(f"UI file not found: {ui_file}")
 
-# Загрузка UI
-Ui_MainWindow, QMainWindowBase = loadUiType(ui_file)
-
-class MainWindow(QMainWindowBase, Ui_MainWindow):
+class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
-        self.setupUi(self)
+        uic.loadUi(ui_file, self)
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     window = MainWindow()
     window.show()
-    sys.exit(app.exec_())
+    sys.exit(app.exec())
