@@ -2,3 +2,4 @@ asyncpg==0.30.0
 PyQt6==6.10.0
 PyQt6-Qt6==6.10.0
 PyQt6_sip==13.10.2
+python-dotenv==1.2.1
