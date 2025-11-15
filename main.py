@@ -67,7 +67,7 @@ class MainWindow(QMainWindow):
         self.button_create.setEnabled(False)
 
         self.import_button = self.findChild(QtW.QPushButton, 'import_button')
-        self.import_button.setEnabled(False)
+        self.import_button.setHidden(True)
         self.export_button = self.findChild(QtW.QPushButton, 'export_button')
         self.export_button.clicked.connect(self.sync_expot)
 
@@ -99,11 +99,10 @@ class MainWindow(QMainWindow):
         asyncio.create_task(self.set_date_mero())
 
     async def set_date_mero(self):
-        print("a")
         mero = await func.get_mero(date.today())
-        print(mero)
         for m in mero:
             self.add_work_widget(m["id"], m["title"], m["time_start"], m["time_stop"])
+        await func.add_activity()
         
     def check_create_button_state(self):
         """Проверяет условия и разблокирует кнопку только когда все условия выполнены"""

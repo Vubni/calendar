@@ -2,6 +2,10 @@ from database.database import Database
 from datetime import datetime, date
 from config import logger
 
+async def add_activity():
+    async with Database() as db:
+        await db.execute("INSERT INTO public.activity (id) values (default)")
+
 async def insert_mero(title:str, date:date, time_start:str, time_stop:str):
     try:
         async with Database() as db:
