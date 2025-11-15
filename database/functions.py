@@ -13,5 +13,12 @@ async def init_db():
     time_stop timestamp with time zone NOT NULL,
     PRIMARY KEY (id)
 );""")
+            
+            await db.execute("""CREATE TABLE IF NOT EXISTS public.activity
+(
+    id bigint NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 9999999999 CACHE 1 ),
+    date timestamp without time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT activity_pkey PRIMARY KEY (id)
+)""")
         except Exception as e:
             print(f"Ошибка при создании таблицы: {e}")
